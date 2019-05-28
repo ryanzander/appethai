@@ -10,15 +10,19 @@ AppeThai is designed to help tourists and expats break though the communication 
 
 ## Features
 
-###Over 200 Thai Dishes
+### Over 200 Thai Dishes
 AppeThai features an extensive collection of dishes ranging from popular dishes to regional specialities.
-###Advanced Search Methods
+
+### Advanced Search Methods
 You can do a category search, keyword search, photo search or simply give it a shake and pick a dish at random. You can also browse your own personal favourites or browse based on recommendations from others.
-###Thai Language - Both Written And Spoken
+
+### Thai Language - Both Written And Spoken
 Communication is one of the greatest obstacles to overcome when it comes to ordering food in Thailand. AppeThai solves this problem by displaying the name of the dish in Thai, as well as providing an audio snippet of the dish spoken with a clear Thai voice.
-###Pick Your Favourites
+
+### Pick Your Favourites
 AppeThai allows you to easily mark down your favourite / regular dishes. This feature also helps you to monitor which foods you have tried already so that you can continue to broaden your experience of Thai cuisine.
-###Who? What? Where? When?
+
+### Who? What? Where? When?
 Find out what people recommend and where. Using the AppeThai Map feature you can easily locate nearby specialities.
 
 ## Developed in Dart with Flutter
