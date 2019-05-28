@@ -28,6 +28,4 @@ Find out what people recommend and where. Using the AppeThai Map feature you can
 ## Developed in Dart with Flutter
 AppeThai 2.0 is a cross-platform app for both iOS and Android developed in Dart with Flutter.
 
-For more info:
-[AppeThai.com](https://appethai.com/)
-[Iglu.net](https://iglu.net)
+For more info: [AppeThai.com](https://appethai.com/) and [Iglu.net](https://iglu.net)
