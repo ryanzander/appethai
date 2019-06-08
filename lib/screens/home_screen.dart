@@ -31,6 +31,9 @@ class HomeScreenState extends State<HomeScreen> {
       foodList.add(food);
     });
     print(foodList.length);
+
+    allFoods = foodList; // setting the global variable
+    print(allFoods.length);
   }
 
   @override

@@ -28,4 +28,4 @@ class Food extends Object {
   }
 }
 
-var allFoods;
+List<Food> allFoods; // global variable

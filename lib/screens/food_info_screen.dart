@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../model/food.dart';
 import '../resources/constants.dart';
 
 class FoodInfoScreen extends StatelessWidget {
