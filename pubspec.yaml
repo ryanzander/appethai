@@ -46,6 +46,7 @@ flutter:
     - assets/images/food_images/
     - assets/images/general/
     - assets/sounds/
+    - assets/dish.json
   #  - images/a_dot_burr.jpeg
   #  - images/a_dot_ham.jpeg
 

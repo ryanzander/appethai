@@ -1,18 +1,49 @@
 import 'package:flutter/material.dart';
 
+import 'dart:convert';
+import 'package:flutter/services.dart' show rootBundle;
+
+import '../model/food.dart';
 import '../resources/constants.dart';
 
-class HomeScreen extends StatelessWidget {
+import 'categories_screen.dart';
+import 'food_list_screen.dart';
+import 'nearby_screen.dart';
+
+class HomeScreen extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    print('creating home state');
+    return HomeScreenState();
+  }
+}
+
+class HomeScreenState extends State<HomeScreen> {
+  List<Food> foodList = [];
+
+  loadJson() async {
+    final jsonString = await rootBundle.loadString('assets/dish.json');
+
+    final map = json.decode(jsonString);
+
+    map.forEach((item) {
+      var food = Food(item);
+      foodList.add(food);
+    });
+    print(foodList.length);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    loadJson();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          'AppeThai',
-          style: TextStyle(
-            color: lightYellow,
-          ),
-        ),
+        title: Image.asset('assets/images/general/appethai.png'),
         backgroundColor: darkGreen,
       ),
       body: Stack(
@@ -24,16 +55,16 @@ class HomeScreen extends StatelessWidget {
                 Expanded(
                   child: Row(
                     children: <Widget>[
-                      seeAll(),
-                      categories(),
+                      seeAll(context),
+                      categories(context),
                     ],
                   ),
                 ),
                 Expanded(
                   child: Row(
                     children: <Widget>[
-                      favorites(),
-                      nearby(),
+                      favorites(context),
+                      nearby(context),
                     ],
                   ),
                 ),
@@ -59,8 +90,8 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  // See all
-  Widget seeAll() {
+// See all
+  Widget seeAll(BuildContext context) {
     return Expanded(
       child: Container(
         margin: EdgeInsets.only(right: 0.5, bottom: 0.5),
@@ -75,6 +106,10 @@ class HomeScreen extends StatelessWidget {
                   padding: EdgeInsets.all(10.0),
                   onPressed: () {
                     print('see all');
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => FoodListScreen()),
+                    );
                   },
                   child: Image.asset('assets/images/icons/button_see_all.png'),
                 ),
@@ -95,7 +130,7 @@ class HomeScreen extends StatelessWidget {
   }
 
   // Categories
-  Widget categories() {
+  Widget categories(BuildContext context) {
     return Expanded(
       child: Container(
         margin: EdgeInsets.only(left: 0.5, bottom: 0.5),
@@ -110,6 +145,11 @@ class HomeScreen extends StatelessWidget {
                   padding: EdgeInsets.all(10.0),
                   onPressed: () {
                     print('categories');
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => CategoriesScreen()),
+                    );
                   },
                   child:
                       Image.asset('assets/images/icons/button_categories.png'),
@@ -131,7 +171,7 @@ class HomeScreen extends StatelessWidget {
   }
 
   // Favorites
-  Widget favorites() {
+  Widget favorites(BuildContext context) {
     return Expanded(
       child: Container(
         margin: EdgeInsets.only(right: 0.5, top: 0.5),
@@ -146,6 +186,10 @@ class HomeScreen extends StatelessWidget {
                   padding: EdgeInsets.all(10.0),
                   onPressed: () {
                     print('favorites');
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => FoodListScreen()),
+                    );
                   },
                   child:
                       Image.asset('assets/images/icons/button_favorites.png'),
@@ -167,7 +211,7 @@ class HomeScreen extends StatelessWidget {
   }
 
   // Nearby
-  Widget nearby() {
+  Widget nearby(BuildContext context) {
     return Expanded(
       child: Container(
         margin: EdgeInsets.only(left: 0.5, top: 0.5),
@@ -182,6 +226,10 @@ class HomeScreen extends StatelessWidget {
                   padding: EdgeInsets.all(10.0),
                   onPressed: () {
                     print('nearby');
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => NearbyScreen()),
+                    );
                   },
                   child: Image.asset('assets/images/icons/button_nearby.png'),
                 ),
