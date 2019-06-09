@@ -111,7 +111,8 @@ class HomeScreenState extends State<HomeScreen> {
                     print('see all');
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => FoodListScreen()),
+                      MaterialPageRoute(
+                          builder: (context) => FoodListScreen(null)),
                     );
                   },
                   child: Image.asset('assets/images/icons/button_see_all.png'),
@@ -191,7 +192,8 @@ class HomeScreenState extends State<HomeScreen> {
                     print('favorites');
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => FoodListScreen()),
+                      MaterialPageRoute(
+                          builder: (context) => FoodListScreen('favorites')),
                     );
                   },
                   child:

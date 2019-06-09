@@ -79,7 +79,8 @@ class CategoriesScreen extends StatelessWidget {
                     print('polular');
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => FoodListScreen()),
+                      MaterialPageRoute(
+                          builder: (context) => FoodListScreen("popular")),
                     );
                   },
                   child: Image.asset(
@@ -119,7 +120,8 @@ class CategoriesScreen extends StatelessWidget {
                     print('rice');
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => FoodListScreen()),
+                      MaterialPageRoute(
+                          builder: (context) => FoodListScreen('rice')),
                     );
                   },
                   child: Image.asset(
@@ -159,7 +161,8 @@ class CategoriesScreen extends StatelessWidget {
                     print('noodles');
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => FoodListScreen()),
+                      MaterialPageRoute(
+                          builder: (context) => FoodListScreen('noodles')),
                     );
                   },
                   child: Image.asset(
@@ -199,7 +202,8 @@ class CategoriesScreen extends StatelessWidget {
                     print('curries');
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => FoodListScreen()),
+                      MaterialPageRoute(
+                          builder: (context) => FoodListScreen('curries')),
                     );
                   },
                   child: Image.asset(
@@ -239,7 +243,8 @@ class CategoriesScreen extends StatelessWidget {
                     print('fried');
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => FoodListScreen()),
+                      MaterialPageRoute(
+                          builder: (context) => FoodListScreen('fried')),
                     );
                   },
                   child: Image.asset(
@@ -279,7 +284,8 @@ class CategoriesScreen extends StatelessWidget {
                     print('grilled');
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => FoodListScreen()),
+                      MaterialPageRoute(
+                          builder: (context) => FoodListScreen('grilled')),
                     );
                   },
                   child: Image.asset(
@@ -319,7 +325,8 @@ class CategoriesScreen extends StatelessWidget {
                     print('soups');
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => FoodListScreen()),
+                      MaterialPageRoute(
+                          builder: (context) => FoodListScreen('soups')),
                     );
                   },
                   child: Image.asset(
@@ -359,7 +366,8 @@ class CategoriesScreen extends StatelessWidget {
                     print('salads');
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => FoodListScreen()),
+                      MaterialPageRoute(
+                          builder: (context) => FoodListScreen('salads')),
                     );
                   },
                   child: Image.asset(
@@ -399,7 +407,8 @@ class CategoriesScreen extends StatelessWidget {
                     print('vegetarian');
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => FoodListScreen()),
+                      MaterialPageRoute(
+                          builder: (context) => FoodListScreen('vegetarian')),
                     );
                   },
                   child: Image.asset(
@@ -439,7 +448,8 @@ class CategoriesScreen extends StatelessWidget {
                     print('northern');
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => FoodListScreen()),
+                      MaterialPageRoute(
+                          builder: (context) => FoodListScreen('northern')),
                     );
                   },
                   child: Image.asset(
@@ -479,7 +489,8 @@ class CategoriesScreen extends StatelessWidget {
                     print('southern');
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => FoodListScreen()),
+                      MaterialPageRoute(
+                          builder: (context) => FoodListScreen('southern')),
                     );
                   },
                   child: Image.asset(
@@ -519,7 +530,8 @@ class CategoriesScreen extends StatelessWidget {
                     print('other');
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => FoodListScreen()),
+                      MaterialPageRoute(
+                          builder: (context) => FoodListScreen('other')),
                     );
                   },
                   child: Image.asset(
