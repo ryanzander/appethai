@@ -91,8 +91,10 @@ class FoodListState extends State<FoodListScreen> {
               child: FoodCell(food),
               onPressed: () {
                 print("clicked $i");
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => FoodInfoScreen()));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => FoodInfoScreen(food)));
               },
             );
           },
