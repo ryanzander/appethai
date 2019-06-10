@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+
+import 'package:audioplayers/audio_cache.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 
 import '../model/food.dart';
@@ -16,6 +18,11 @@ class FoodInfoScreen extends StatefulWidget {
 }
 
 class FoodInfoState extends State<FoodInfoScreen> {
+  static AudioCache player = AudioCache();
+  playAudio(int id) {
+    player.play('/sounds/$id.mp3');
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -186,7 +193,9 @@ class FoodInfoState extends State<FoodInfoScreen> {
                       child: FlatButton(
                         padding: EdgeInsets.all(0.0),
                         child: Image.asset('assets/images/icons/play.png'),
-                        onPressed: () {},
+                        onPressed: () {
+                          playAudio(widget.food.id);
+                        },
                       ),
                     )
                   ],
