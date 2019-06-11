@@ -274,7 +274,7 @@ class FoodInfoState extends State<FoodInfoScreen> {
 
   checkFavorites() async {
     print("checking");
-    var favorites = await getFavorites();
+    List<String> favorites = await getFavorites();
     final id = "${widget.food.id}";
     var isFavorite = false;
     if (favorites.contains(id)) {

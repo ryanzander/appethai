@@ -17,7 +17,7 @@ class FoodListScreen extends StatefulWidget {
 }
 
 class FoodListState extends State<FoodListScreen> {
-  List<Food> foodList;
+  List<Food> foodList = [];
 
   @override
   void initState() {
@@ -27,12 +27,12 @@ class FoodListState extends State<FoodListScreen> {
   }
 
   loadData() {
-    foodList = [];
     if (widget.category == null) {
       foodList = allFoods;
     } else if (widget.category == "favorites") {
       getFavorites();
     } else {
+      foodList.clear();
       allFoods.forEach(
         (food) {
           final categories = food.category;
@@ -44,10 +44,10 @@ class FoodListState extends State<FoodListScreen> {
     }
   }
 
-  //Future<List>
   getFavorites() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     List<String> favorites = prefs.get('favorites') ?? [];
+    foodList.clear();
     allFoods.forEach(
       (food) {
         final id = '${food.id}';
