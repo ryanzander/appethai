@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:audioplayers/audio_cache.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../model/food.dart';
 import '../resources/constants.dart';
@@ -21,6 +22,13 @@ class FoodInfoState extends State<FoodInfoScreen> {
   static AudioCache player = AudioCache();
   playAudio(int id) {
     player.play('/sounds/$id.mp3');
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    checkFavorites();
   }
 
   @override
@@ -189,8 +197,10 @@ class FoodInfoState extends State<FoodInfoScreen> {
             width: 40.0,
             child: FlatButton(
               padding: EdgeInsets.all(0.0),
-              child: Image.asset('assets/images/icons/button_favorites.png'),
-              onPressed: () {},
+              child: Image.asset(setButton()),
+              onPressed: () {
+                favBtnPressed();
+              },
             ),
           ),
           Container(
@@ -210,5 +220,81 @@ class FoodInfoState extends State<FoodInfoScreen> {
         ],
       ),
     );
+  }
+
+  String setButton() {
+    print("set button");
+    if (widget.food.isFavorite == true) {
+      return 'assets/images/icons/button_favorites_dark.png';
+    } else {
+      return 'assets/images/icons/button_favorites.png';
+    }
+  }
+
+  favBtnPressed() {
+    if (widget.food.isFavorite == true) {
+      print(widget.food.isFavorite);
+      widget.food.isFavorite = false;
+      removeFromFavorites();
+    } else {
+      print(widget.food.isFavorite);
+      widget.food.isFavorite = true;
+      addToFavorites();
+    }
+    setState(() {
+      setButton();
+    });
+  }
+
+  addToFavorites() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    List<String> favorites = prefs.get('favorites') ?? [];
+    final id = "${widget.food.id}";
+    favorites.add(id);
+
+    prefs.setStringList('favorites', favorites);
+  }
+
+  removeFromFavorites() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    List<String> favorites = prefs.get('favorites') ?? [];
+    final id = "${widget.food.id}";
+
+    List<String> tempList = [];
+    favorites.forEach((item) {
+      if (item != id) {
+        tempList.add(item);
+      }
+    });
+
+    prefs.setStringList('favorites', tempList);
+  }
+
+  checkFavorites() async {
+    print("checking");
+    var favorites = await getFavorites();
+    final id = "${widget.food.id}";
+    var isFavorite = false;
+    if (favorites.contains(id)) {
+      isFavorite = true;
+    }
+
+    if (isFavorite == true) {
+      widget.food.isFavorite = true;
+    } else {
+      widget.food.isFavorite = false;
+    }
+    setState(() {
+      setButton();
+    });
+  }
+
+  Future<List> getFavorites() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    List<String> favorites = prefs.get('favorites') ?? [];
+    return favorites;
   }
 }

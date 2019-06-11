@@ -1,5 +1,3 @@
-//import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -19,18 +17,21 @@ class FoodListScreen extends StatefulWidget {
 }
 
 class FoodListState extends State<FoodListScreen> {
-  List<Food> foodList = [];
+  List<Food> foodList;
 
   @override
   void initState() {
     super.initState();
-    print("on food list screen");
-    print(allFoods.length);
 
+    loadData();
+  }
+
+  loadData() {
+    foodList = [];
     if (widget.category == null) {
       foodList = allFoods;
     } else if (widget.category == "favorites") {
-      useFavorites();
+      getFavorites();
     } else {
       allFoods.forEach(
         (food) {
@@ -43,8 +44,10 @@ class FoodListState extends State<FoodListScreen> {
     }
   }
 
-  useFavorites() async {
-    final favorites = await getFavorites();
+  //Future<List>
+  getFavorites() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    List<String> favorites = prefs.get('favorites') ?? [];
     allFoods.forEach(
       (food) {
         final id = '${food.id}';
@@ -55,16 +58,6 @@ class FoodListState extends State<FoodListScreen> {
         }
       },
     );
-  }
-
-  Future<List> getFavorites() async {
-    SharedPreferences.setMockInitialValues({
-      // 'flutter.favorites': [2014080006, 2014080004]
-    });
-
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setStringList('favorites', ['2014080006', '2014080004']);
-    return prefs.get('favorites') ?? []; //[2014080006, 2014080004];
   }
 
   @override
@@ -92,9 +85,10 @@ class FoodListState extends State<FoodListScreen> {
               onPressed: () {
                 print("clicked $i");
                 Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => FoodInfoScreen(food)));
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => FoodInfoScreen(food)))
+                    .whenComplete(loadData);
               },
             );
           },
