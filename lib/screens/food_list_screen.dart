@@ -17,44 +17,43 @@ class FoodListScreen extends StatefulWidget {
 }
 
 class FoodListState extends State<FoodListScreen> {
-  List<Food> foodList = [];
+  List<Food> _foodList = [];
 
   @override
   void initState() {
     super.initState();
-
-    loadData();
+    _loadData();
   }
 
-  loadData() {
+  _loadData() {
     if (widget.category == null) {
-      foodList = allFoods;
+      _foodList = allFoods;
     } else if (widget.category == "favorites") {
-      getFavorites();
+      _getFavorites();
     } else {
-      foodList.clear();
+      _foodList.clear();
       allFoods.forEach(
         (food) {
           final categories = food.category;
           if (categories.contains(widget.category)) {
-            foodList.add(food);
+            _foodList.add(food);
           }
         },
       );
     }
   }
 
-  getFavorites() async {
+  _getFavorites() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var favorites = prefs.get('favorites') ?? [];
     print("List got favorites: $favorites");
-    foodList.clear();
+    _foodList.clear();
     allFoods.forEach(
       (food) {
         final id = '${food.id}';
         if (favorites.contains(id)) {
           setState(() {
-            foodList.add(food);
+            _foodList.add(food);
           });
         }
       },
@@ -77,9 +76,9 @@ class FoodListState extends State<FoodListScreen> {
           separatorBuilder: (BuildContext context, int index) => Divider(
                 color: lightGreen,
               ),
-          itemCount: foodList.length,
+          itemCount: _foodList.length,
           itemBuilder: (context, i) {
-            final food = foodList[i];
+            final food = _foodList[i];
             return FlatButton(
               padding: EdgeInsets.all(0.0),
               child: FoodCell(food),
@@ -89,7 +88,7 @@ class FoodListState extends State<FoodListScreen> {
                         context,
                         MaterialPageRoute(
                             builder: (context) => FoodInfoScreen(food)))
-                    .whenComplete(loadData);
+                    .whenComplete(_loadData);
               },
             );
           },

@@ -20,15 +20,14 @@ class FoodInfoScreen extends StatefulWidget {
 
 class FoodInfoState extends State<FoodInfoScreen> {
   static AudioCache player = AudioCache();
-  playAudio(int id) {
+  _playAudio(int id) {
     player.play('/sounds/$id.mp3');
   }
 
   @override
   void initState() {
     super.initState();
-
-    checkFavorites();
+    _checkFavorites();
   }
 
   @override
@@ -52,11 +51,11 @@ class FoodInfoState extends State<FoodInfoScreen> {
         child: Center(
           child: Column(
             children: <Widget>[
-              foodName(),
-              imageBox(),
-              chiliBox(),
-              descBox(),
-              bottomButtons(),
+              _foodName(),
+              _imageBox(),
+              _chiliBox(),
+              _descBox(),
+              _bottomButtons(),
             ],
           ),
         ),
@@ -65,7 +64,7 @@ class FoodInfoState extends State<FoodInfoScreen> {
   }
 
   //food name
-  Widget foodName() {
+  Widget _foodName() {
     return Row(
       children: <Widget>[
         Expanded(
@@ -115,7 +114,7 @@ class FoodInfoState extends State<FoodInfoScreen> {
   }
 
   // image box
-  Widget imageBox() {
+  Widget _imageBox() {
     return Expanded(
       child: Center(
         child: Padding(
@@ -144,7 +143,7 @@ class FoodInfoState extends State<FoodInfoScreen> {
   }
 
   // chili box
-  Widget chiliBox() {
+  Widget _chiliBox() {
     return Container(
       height: 40.0,
       decoration: BoxDecoration(
@@ -165,7 +164,7 @@ class FoodInfoState extends State<FoodInfoScreen> {
   }
 
   // desc box
-  Widget descBox() {
+  Widget _descBox() {
     return Row(
       children: <Widget>[
         Expanded(
@@ -187,7 +186,7 @@ class FoodInfoState extends State<FoodInfoScreen> {
   }
 
   // bottom buttons
-  Widget bottomButtons() {
+  Widget _bottomButtons() {
     return Container(
       padding: EdgeInsets.all(12.0),
       child: Row(
@@ -198,9 +197,9 @@ class FoodInfoState extends State<FoodInfoScreen> {
             width: 40.0,
             child: FlatButton(
               padding: EdgeInsets.all(0.0),
-              child: Image.asset(setButton()),
+              child: Image.asset(_setButton()),
               onPressed: () {
-                favBtnPressed();
+                _favBtnPressed();
               },
             ),
           ),
@@ -214,7 +213,7 @@ class FoodInfoState extends State<FoodInfoScreen> {
               padding: EdgeInsets.all(0.0),
               child: Image.asset('assets/images/icons/play.png'),
               onPressed: () {
-                playAudio(widget.food.id);
+                _playAudio(widget.food.id);
               },
             ),
           )
@@ -223,7 +222,7 @@ class FoodInfoState extends State<FoodInfoScreen> {
     );
   }
 
-  String setButton() {
+  String _setButton() {
     print("set button");
     if (widget.food.isFavorite == true) {
       return 'assets/images/icons/button_favorites_dark.png';
@@ -232,22 +231,22 @@ class FoodInfoState extends State<FoodInfoScreen> {
     }
   }
 
-  favBtnPressed() {
+  _favBtnPressed() {
     if (widget.food.isFavorite == true) {
       print(widget.food.isFavorite);
       widget.food.isFavorite = false;
-      removeFromFavorites();
+      _removeFromFavorites();
     } else {
       print(widget.food.isFavorite);
       widget.food.isFavorite = true;
-      addToFavorites();
+      _addToFavorites();
     }
     setState(() {
-      setButton();
+      _setButton();
     });
   }
 
-  addToFavorites() async {
+  _addToFavorites() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     List<String> favorites = prefs.get('favorites') ?? [];
     print("add to favorites: $favorites");
@@ -258,7 +257,7 @@ class FoodInfoState extends State<FoodInfoScreen> {
     prefs.setStringList('favorites', favorites);
   }
 
-  removeFromFavorites() async {
+  _removeFromFavorites() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     var favorites = prefs.get('favorites') ?? [];
     print("remove from favorites: $favorites");
@@ -274,7 +273,7 @@ class FoodInfoState extends State<FoodInfoScreen> {
     prefs.setStringList('favorites', tempList);
   }
 
-  checkFavorites() async {
+  _checkFavorites() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var favorites = prefs.get('favorites') ?? [];
     print("checking favorites: $favorites");
@@ -291,7 +290,7 @@ class FoodInfoState extends State<FoodInfoScreen> {
       widget.food.isFavorite = false;
     }
     setState(() {
-      setButton();
+      _setButton();
     });
   }
 }

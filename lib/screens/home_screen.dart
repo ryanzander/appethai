@@ -18,25 +18,24 @@ class HomeScreen extends StatefulWidget {
 }
 
 class HomeScreenState extends State<HomeScreen> {
-  List<Food> foodList = [];
+  List<Food> _foodList = [];
 
-  loadJson() async {
+  _loadJson() async {
     final jsonString = await rootBundle.loadString('assets/dish.json');
-
     final map = json.decode(jsonString);
 
     map.forEach((item) {
       var food = Food(item);
-      foodList.add(food);
+      _foodList.add(food);
     });
 
-    allFoods = foodList; // setting the global variable
+    allFoods = _foodList; // setting the global variable
   }
 
   @override
   void initState() {
     super.initState();
-    loadJson();
+    _loadJson();
   }
 
   @override
@@ -53,16 +52,16 @@ class HomeScreenState extends State<HomeScreen> {
             Expanded(
               child: Row(
                 children: <Widget>[
-                  seeAll(context),
-                  categories(context),
+                  _seeAll(context),
+                  _categories(context),
                 ],
               ),
             ),
             Expanded(
               child: Row(
                 children: <Widget>[
-                  favorites(context),
-                  nearby(context),
+                  _favorites(context),
+                  _nearby(context),
                 ],
               ),
             ),
@@ -73,7 +72,7 @@ class HomeScreenState extends State<HomeScreen> {
   }
 
 // See all
-  Widget seeAll(BuildContext context) {
+  Widget _seeAll(BuildContext context) {
     return Expanded(
       child: Container(
         margin: EdgeInsets.only(right: 0.5, bottom: 0.5),
@@ -113,7 +112,7 @@ class HomeScreenState extends State<HomeScreen> {
   }
 
   // Categories
-  Widget categories(BuildContext context) {
+  Widget _categories(BuildContext context) {
     return Expanded(
       child: Container(
         margin: EdgeInsets.only(left: 0.5, bottom: 0.5),
@@ -154,7 +153,7 @@ class HomeScreenState extends State<HomeScreen> {
   }
 
   // Favorites
-  Widget favorites(BuildContext context) {
+  Widget _favorites(BuildContext context) {
     return Expanded(
       child: Container(
         margin: EdgeInsets.only(right: 0.5, top: 0.5),
@@ -195,7 +194,7 @@ class HomeScreenState extends State<HomeScreen> {
   }
 
   // Nearby
-  Widget nearby(BuildContext context) {
+  Widget _nearby(BuildContext context) {
     return Expanded(
       child: Container(
         margin: EdgeInsets.only(left: 0.5, top: 0.5),

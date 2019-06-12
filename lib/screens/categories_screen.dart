@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../model/food.dart';
 import '../resources/constants.dart';
 import 'food_list_screen.dart';
 
@@ -22,36 +21,36 @@ class CategoriesScreen extends StatelessWidget {
             Expanded(
               child: Row(
                 children: <Widget>[
-                  popular(context),
-                  rice(context),
-                  noodles(context),
+                  _popular(context),
+                  _rice(context),
+                  _noodles(context),
                 ],
               ),
             ),
             Expanded(
               child: Row(
                 children: <Widget>[
-                  curries(context),
-                  fried(context),
-                  grilled(context),
+                  _curries(context),
+                  _fried(context),
+                  _grilled(context),
                 ],
               ),
             ),
             Expanded(
               child: Row(
                 children: <Widget>[
-                  soups(context),
-                  salads(context),
-                  vegetarian(context),
+                  _soups(context),
+                  _salads(context),
+                  _vegetarian(context),
                 ],
               ),
             ),
             Expanded(
               child: Row(
                 children: <Widget>[
-                  northern(context),
-                  southern(context),
-                  other(context),
+                  _northern(context),
+                  _southern(context),
+                  _other(context),
                 ],
               ),
             ),
@@ -62,7 +61,7 @@ class CategoriesScreen extends StatelessWidget {
   }
 
   // Popular
-  Widget popular(BuildContext context) {
+  Widget _popular(BuildContext context) {
     return Expanded(
       child: Container(
         margin: EdgeInsets.only(right: 0.5, bottom: 0.5),
@@ -103,7 +102,7 @@ class CategoriesScreen extends StatelessWidget {
   }
 
   // Rice
-  Widget rice(BuildContext context) {
+  Widget _rice(BuildContext context) {
     return Expanded(
       child: Container(
         margin: EdgeInsets.only(left: 0.5, right: 0.5, bottom: 0.5),
@@ -144,7 +143,7 @@ class CategoriesScreen extends StatelessWidget {
   }
 
   // Noodles
-  Widget noodles(BuildContext context) {
+  Widget _noodles(BuildContext context) {
     return Expanded(
       child: Container(
         margin: EdgeInsets.only(left: 0.5, bottom: 0.5),
@@ -185,7 +184,7 @@ class CategoriesScreen extends StatelessWidget {
   }
 
   // Curries
-  Widget curries(BuildContext context) {
+  Widget _curries(BuildContext context) {
     return Expanded(
       child: Container(
         margin: EdgeInsets.only(right: 0.5, top: 0.5, bottom: 0.5),
@@ -226,7 +225,7 @@ class CategoriesScreen extends StatelessWidget {
   }
 
   // Fried
-  Widget fried(BuildContext context) {
+  Widget _fried(BuildContext context) {
     return Expanded(
       child: Container(
         margin: EdgeInsets.all(0.5),
@@ -267,7 +266,7 @@ class CategoriesScreen extends StatelessWidget {
   }
 
   // Grilled
-  Widget grilled(BuildContext context) {
+  Widget _grilled(BuildContext context) {
     return Expanded(
       child: Container(
         margin: EdgeInsets.only(left: 0.5, top: 0.5, bottom: 0.5),
@@ -308,7 +307,7 @@ class CategoriesScreen extends StatelessWidget {
   }
 
   // Soups
-  Widget soups(BuildContext context) {
+  Widget _soups(BuildContext context) {
     return Expanded(
       child: Container(
         margin: EdgeInsets.only(right: 0.5, top: 0.5, bottom: 0.5),
@@ -349,7 +348,7 @@ class CategoriesScreen extends StatelessWidget {
   }
 
   // Salads
-  Widget salads(BuildContext context) {
+  Widget _salads(BuildContext context) {
     return Expanded(
       child: Container(
         margin: EdgeInsets.all(0.5),
@@ -390,7 +389,7 @@ class CategoriesScreen extends StatelessWidget {
   }
 
   // Vegetarian
-  Widget vegetarian(BuildContext context) {
+  Widget _vegetarian(BuildContext context) {
     return Expanded(
       child: Container(
         margin: EdgeInsets.only(left: 0.5, top: 0.5, bottom: 0.5),
@@ -431,7 +430,7 @@ class CategoriesScreen extends StatelessWidget {
   }
 
   // Northern
-  Widget northern(BuildContext context) {
+  Widget _northern(BuildContext context) {
     return Expanded(
       child: Container(
         margin: EdgeInsets.only(right: 0.5, top: 0.5),
@@ -472,7 +471,7 @@ class CategoriesScreen extends StatelessWidget {
   }
 
   // Southern
-  Widget southern(BuildContext context) {
+  Widget _southern(BuildContext context) {
     return Expanded(
       child: Container(
         margin: EdgeInsets.only(right: 0.5, left: 0.5, top: 0.5),
@@ -513,7 +512,7 @@ class CategoriesScreen extends StatelessWidget {
   }
 
   // Other
-  Widget other(BuildContext context) {
+  Widget _other(BuildContext context) {
     return Expanded(
       child: Container(
         margin: EdgeInsets.only(left: 0.5, top: 0.5),
