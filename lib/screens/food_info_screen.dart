@@ -248,13 +248,18 @@ class FoodInfoState extends State<FoodInfoScreen> {
 
   _addToFavorites() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    List<String> favorites = prefs.get('favorites') ?? [];
+    var favorites = prefs.get('favorites') ?? [];
     print("add to favorites: $favorites");
 
     final id = "${widget.food.id}";
-    favorites.add(id);
-    print("new favorites: $favorites");
-    prefs.setStringList('favorites', favorites);
+    List<String> tempList = [];
+
+    favorites.forEach((item) {
+      tempList.add(item);
+    });
+    tempList.add(id);
+    print("new favorites: $tempList");
+    prefs.setStringList('favorites', tempList);
   }
 
   _removeFromFavorites() async {

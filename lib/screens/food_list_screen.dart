@@ -18,6 +18,9 @@ class FoodListScreen extends StatefulWidget {
 
 class FoodListState extends State<FoodListScreen> {
   List<Food> _foodList = [];
+  List<Food> _filteredList = [];
+  String _searchTerm = "";
+  TextEditingController _editingController = TextEditingController();
 
   @override
   void initState() {
@@ -28,10 +31,13 @@ class FoodListState extends State<FoodListScreen> {
   _loadData() {
     if (widget.category == null) {
       _foodList = allFoods;
+      _filteredList.clear();
+      _filteredList.addAll(_foodList);
     } else if (widget.category == "favorites") {
       _getFavorites();
     } else {
       _foodList.clear();
+      _filteredList.clear();
       allFoods.forEach(
         (food) {
           final categories = food.category;
@@ -40,6 +46,11 @@ class FoodListState extends State<FoodListScreen> {
           }
         },
       );
+      _filteredList.addAll(_foodList);
+    }
+    if (_searchTerm != "") {
+      print("search term: $_searchTerm");
+      _filterSearchResults(_searchTerm);
     }
   }
 
@@ -48,16 +59,54 @@ class FoodListState extends State<FoodListScreen> {
     var favorites = prefs.get('favorites') ?? [];
     print("List got favorites: $favorites");
     _foodList.clear();
+    _filteredList.clear();
     allFoods.forEach(
       (food) {
         final id = '${food.id}';
         if (favorites.contains(id)) {
-          setState(() {
-            _foodList.add(food);
-          });
+          _foodList.add(food);
         }
       },
     );
+    setState(() {
+      _filteredList.addAll(_foodList);
+      if (_searchTerm != "") {
+        print("search term: $_searchTerm");
+        _filterSearchResults(_searchTerm);
+      }
+    });
+  }
+
+  void _filterSearchResults(String query) {
+    _searchTerm = query.toLowerCase();
+    List<Food> searchList = [];
+    searchList.addAll(_foodList);
+    //
+    if (query.isNotEmpty) {
+      List<Food> matchList = [];
+      searchList.forEach((food) {
+        final nameEng = food.nameEng;
+        final nameThai = food.nameThai;
+        final nameThaiEng = food.nameThaiEng;
+        final keyword = food.keyword;
+        final stringToMatch =
+            '$nameEng $nameThai $nameThaiEng $keyword'.toLowerCase();
+
+        if (stringToMatch.contains(_searchTerm)) {
+          matchList.add(food);
+        }
+      });
+      setState(() {
+        _filteredList.clear();
+        _filteredList.addAll(matchList);
+      });
+      return;
+    } else {
+      setState(() {
+        _filteredList.clear();
+        _filteredList.addAll(_foodList);
+      });
+    }
   }
 
   @override
@@ -71,29 +120,77 @@ class FoodListState extends State<FoodListScreen> {
         ),
       ),
       body: Container(
-        color: mediumGreen,
-        child: ListView.separated(
-          separatorBuilder: (BuildContext context, int index) => Divider(
-                color: lightGreen,
+          color: mediumGreen,
+          child: Column(
+            children: <Widget>[
+              Padding(
+                padding: EdgeInsets.all(12.0),
+                child: Theme(
+                  data: ThemeData(
+                    primaryColor: darkGreen,
+                  ),
+                  child: TextField(
+                    style: TextStyle(
+                      color: darkGreen,
+                      fontSize: 17,
+                      fontWeight: FontWeight.w500,
+                    ),
+                    cursorColor: darkGreen,
+                    onChanged: (value) {
+                      _filterSearchResults(value);
+                    },
+                    controller: _editingController,
+                    decoration: InputDecoration(
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12.0),
+                        borderSide: BorderSide(
+                          color: darkGreen,
+                          width: 2.0,
+                        ),
+                      ),
+                      filled: true,
+                      fillColor: lightGreen,
+                      hintText: "Search",
+                      hintStyle: TextStyle(
+                        color: darkGreen,
+                      ),
+                      prefixIcon: Icon(
+                        Icons.search,
+                        color: darkGreen,
+                      ),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12.0),
+                      ),
+                    ),
+                  ),
+                ),
               ),
-          itemCount: _foodList.length,
-          itemBuilder: (context, i) {
-            final food = _foodList[i];
-            return FlatButton(
-              padding: EdgeInsets.all(0.0),
-              child: FoodCell(food),
-              onPressed: () {
-                print("clicked $i");
-                Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => FoodInfoScreen(food)))
-                    .whenComplete(_loadData);
-              },
-            );
-          },
-        ),
-      ),
+              Expanded(
+                child: ListView.separated(
+                  separatorBuilder: (BuildContext context, int index) =>
+                      Divider(
+                        color: lightGreen,
+                      ),
+                  itemCount: _filteredList.length,
+                  itemBuilder: (context, i) {
+                    final food = _filteredList[i];
+                    return FlatButton(
+                      padding: EdgeInsets.all(0.0),
+                      child: FoodCell(food),
+                      onPressed: () {
+                        print("clicked $i");
+                        Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => FoodInfoScreen(food)))
+                            .whenComplete(_loadData);
+                      },
+                    );
+                  },
+                ),
+              ),
+            ],
+          )),
     );
   }
 }
