@@ -46,7 +46,8 @@ class FoodListState extends State<FoodListScreen> {
 
   getFavorites() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    List<String> favorites = prefs.get('favorites') ?? [];
+    var favorites = prefs.get('favorites') ?? [];
+    print("List got favorites: $favorites");
     foodList.clear();
     allFoods.forEach(
       (food) {

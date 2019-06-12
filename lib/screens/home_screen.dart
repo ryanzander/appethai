@@ -13,7 +13,6 @@ import 'nearby_screen.dart';
 class HomeScreen extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    print('creating home state');
     return HomeScreenState();
   }
 }
@@ -30,10 +29,8 @@ class HomeScreenState extends State<HomeScreen> {
       var food = Food(item);
       foodList.add(food);
     });
-    print(foodList.length);
 
     allFoods = foodList; // setting the global variable
-    print(allFoods.length);
   }
 
   @override
@@ -49,46 +46,28 @@ class HomeScreenState extends State<HomeScreen> {
         title: Image.asset('assets/images/general/appethai.png'),
         backgroundColor: darkGreen,
       ),
-      body: Stack(
-        children: <Widget>[
-          Container(
-            color: lightGreen,
-            child: Column(
-              children: <Widget>[
-                Expanded(
-                  child: Row(
-                    children: <Widget>[
-                      seeAll(context),
-                      categories(context),
-                    ],
-                  ),
-                ),
-                Expanded(
-                  child: Row(
-                    children: <Widget>[
-                      favorites(context),
-                      nearby(context),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Center(
-            child: Container(
-              color: mediumGreen,
-              height: 80.0,
-              width: 80.0,
-              child: FlatButton(
-                padding: EdgeInsets.all(4.0),
-                child: Image.asset('assets/images/icons/random.png'),
-                onPressed: () {
-                  print('shake');
-                },
+      body: Container(
+        color: lightGreen,
+        child: Column(
+          children: <Widget>[
+            Expanded(
+              child: Row(
+                children: <Widget>[
+                  seeAll(context),
+                  categories(context),
+                ],
               ),
             ),
-          ),
-        ],
+            Expanded(
+              child: Row(
+                children: <Widget>[
+                  favorites(context),
+                  nearby(context),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

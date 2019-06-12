@@ -43,6 +43,7 @@ class FoodInfoState extends State<FoodInfoScreen> {
       ),
       body: Container(
         decoration: BoxDecoration(
+          color: mediumGreen,
           image: DecorationImage(
             image: AssetImage('assets/images/general/background.png'),
             fit: BoxFit.cover,
@@ -248,33 +249,36 @@ class FoodInfoState extends State<FoodInfoScreen> {
 
   addToFavorites() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-
     List<String> favorites = prefs.get('favorites') ?? [];
+    print("add to favorites: $favorites");
+
     final id = "${widget.food.id}";
     favorites.add(id);
-
+    print("new favorites: $favorites");
     prefs.setStringList('favorites', favorites);
   }
 
   removeFromFavorites() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
+    var favorites = prefs.get('favorites') ?? [];
+    print("remove from favorites: $favorites");
 
-    List<String> favorites = prefs.get('favorites') ?? [];
     final id = "${widget.food.id}";
-
     List<String> tempList = [];
     favorites.forEach((item) {
       if (item != id) {
         tempList.add(item);
       }
     });
-
+    print("new favorites: $tempList");
     prefs.setStringList('favorites', tempList);
   }
 
   checkFavorites() async {
-    print("checking");
-    List<String> favorites = await getFavorites();
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var favorites = prefs.get('favorites') ?? [];
+    print("checking favorites: $favorites");
+
     final id = "${widget.food.id}";
     var isFavorite = false;
     if (favorites.contains(id)) {
@@ -289,12 +293,5 @@ class FoodInfoState extends State<FoodInfoScreen> {
     setState(() {
       setButton();
     });
-  }
-
-  Future<List> getFavorites() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-
-    List<String> favorites = prefs.get('favorites') ?? [];
-    return favorites;
   }
 }
