@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'dart:convert';
 import 'package:flutter/services.dart' show rootBundle;
+import 'package:url_launcher/url_launcher.dart';
 
 import '../model/food.dart';
 import '../resources/constants.dart';
@@ -32,6 +33,15 @@ class HomeScreenState extends State<HomeScreen> {
     allFoods = _foodList; // setting the global variable
   }
 
+  _launchURL() async {
+    const url = 'https://iglu.net';
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
   @override
   void initState() {
     super.initState();
@@ -47,22 +57,50 @@ class HomeScreenState extends State<HomeScreen> {
       ),
       body: Container(
         color: lightGreen,
-        child: Column(
+        child: Stack(
           children: <Widget>[
-            Expanded(
-              child: Row(
-                children: <Widget>[
-                  _seeAll(context),
-                  _categories(context),
-                ],
-              ),
+            Column(
+              children: <Widget>[
+                Expanded(
+                  child: Row(
+                    children: <Widget>[
+                      _seeAll(context),
+                      _categories(context),
+                    ],
+                  ),
+                ),
+                Expanded(
+                  child: Row(
+                    children: <Widget>[
+                      _favorites(context),
+                      _nearby(context),
+                    ],
+                  ),
+                ),
+              ],
             ),
-            Expanded(
-              child: Row(
-                children: <Widget>[
-                  _favorites(context),
-                  _nearby(context),
-                ],
+            Center(
+              child: Container(
+                height: 100.0,
+                width: 140.0,
+                color: mediumGreen,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: <Widget>[
+                    Text("By",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 17,
+                        )),
+                    FlatButton(
+                      onPressed: _launchURL,
+                      padding: EdgeInsets.all(0.0),
+                      child:
+                          Image.asset('assets/images/general/iglu_colored.png'),
+                    ),
+                  ],
+                ),
               ),
             ),
           ],

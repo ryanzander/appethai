@@ -8,7 +8,6 @@
 .buildlog/
 .history
 .svn/
-**/lib/resources/private_constants.dart
 
 # IntelliJ related
 *.iml

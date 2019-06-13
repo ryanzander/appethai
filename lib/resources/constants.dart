@@ -9,3 +9,7 @@ Color darkYellow = const Color.fromRGBO(254, 231, 56, 1.0);
 Color lightYellow = const Color(0xFFFEFC9D);
 Color textGreen = const Color(0xFF006639);
 Color textRed = const Color(0xFFE10613);
+
+// google map api
+String iosMapApiKey = "AIzaSyCFMCsq8DWDHGAGv1kmPp5Yh4IcoPuNAcQ";
+String androidMapApiKey = "AIzaSyDsbL6VLmRaq-guiGTBvdAeTY5dYgSfLO4";
