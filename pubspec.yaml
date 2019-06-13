@@ -26,6 +26,7 @@ dependencies:
   auto_size_text: ^2.0.1
   shared_preferences: ^0.5.3+1
   audioplayers: ^0.12.1
+  map_view: ^0.0.14
 
 dev_dependencies:
   flutter_test:
