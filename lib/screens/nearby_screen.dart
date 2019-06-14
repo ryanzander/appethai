@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 
+import '../resources/api_keys.dart';
 import '../resources/constants.dart';
 
 class NearbyScreen extends StatefulWidget {
@@ -68,12 +69,12 @@ class NearbyState extends State<NearbyScreen> {
   Future<void> _onMapCreated(GoogleMapController controller) async {
     mapController = controller;
 
-    //if (Platform.isIOS) {
-    //  apiKey = iosMapApiKey;
-    //}
-    //if (Platform.isAndroid) {
-    _apiKey = androidMapApiKey;
-    //}
+    if (Platform.isIOS) {
+      _apiKey = iosMapApiKey;
+    }
+    if (Platform.isAndroid) {
+      _apiKey = androidMapApiKey;
+    }
 
     final url =
         "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=$_lat,$_lon&key=$_apiKey&radius=10000&keyword=thai&type=restaurant";
