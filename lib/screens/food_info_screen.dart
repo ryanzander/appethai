@@ -21,7 +21,7 @@ class FoodInfoScreen extends StatefulWidget {
 class FoodInfoState extends State<FoodInfoScreen> {
   static AudioCache player = AudioCache();
   _playAudio(int id) {
-    player.play('/sounds/$id.mp3');
+    player.play('sounds/$id.mp3');
   }
 
   @override
