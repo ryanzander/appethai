@@ -78,7 +78,7 @@ class FoodInfoState extends State<FoodInfoScreen> {
                   style: TextStyle(
                     color: lightYellow,
                     fontSize: 20,
-                    fontWeight: FontWeight.w600,
+                    fontWeight: FontWeight.w500,
                   ),
                   maxLines: 2,
                   textAlign: TextAlign.center,

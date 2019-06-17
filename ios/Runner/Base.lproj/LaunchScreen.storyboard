@@ -21,14 +21,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="YRO-k0-Ey4">
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" image="background_dark" translatesAutoresizingMaskIntoConstraints="NO" id="YRO-k0-Ey4">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="pzr-tf-wVT">
-                                <rect key="frame" x="77" y="318" width="260" height="260"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AppeThai_splash2" translatesAutoresizingMaskIntoConstraints="NO" id="pzr-tf-wVT">
+                                <rect key="frame" x="57" y="298" width="300" height="300"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="260" id="55m-WJ-K7L"/>
-                                    <constraint firstAttribute="height" constant="260" id="Dbo-DN-Brx"/>
+                                    <constraint firstAttribute="width" constant="300" id="55m-WJ-K7L"/>
+                                    <constraint firstAttribute="height" constant="300" id="Dbo-DN-Brx"/>
                                 </constraints>
                             </imageView>
                         </subviews>
@@ -49,7 +49,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="background" width="1720" height="2568"/>
-        <image name="logo" width="790" height="790"/>
+        <image name="AppeThai_splash2" width="790" height="790"/>
+        <image name="background_dark" width="1700" height="2538"/>
     </resources>
 </document>

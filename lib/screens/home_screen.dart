@@ -89,15 +89,15 @@ class HomeScreenState extends State<HomeScreen> {
                   children: <Widget>[
                     Text("By",
                         style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w600,
-                          fontSize: 17,
+                          color: lightYellow,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 14,
                         )),
                     FlatButton(
                       onPressed: _launchURL,
                       padding: EdgeInsets.all(0.0),
                       child:
-                          Image.asset('assets/images/general/iglu_colored.png'),
+                          Image.asset('assets/images/general/iglu_white.png'),
                     ),
                   ],
                 ),

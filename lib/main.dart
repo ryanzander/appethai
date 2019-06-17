@@ -10,6 +10,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'AppeThai',
+      theme: ThemeData(fontFamily: 'Poppins'),
       home: HomeScreen(),
     );
   }
