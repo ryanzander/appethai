@@ -171,12 +171,13 @@ class FoodInfoState extends State<FoodInfoScreen> {
           child: Container(
             padding: EdgeInsets.all(12.0),
             color: mediumGreen,
-            child: Text(
+            child: AutoSizeText(
               '${widget.food.desc}',
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 17,
               ),
+              maxLines: 5,
               textAlign: TextAlign.center,
             ),
           ),
