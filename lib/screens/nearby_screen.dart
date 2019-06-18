@@ -1,4 +1,5 @@
-import 'dart:io';
+//import 'dart:io';
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
@@ -23,6 +24,7 @@ class NearbyState extends State<NearbyScreen> {
   var _gotLocation = false;
 
   Map<String, double> currentLocation;
+
   double _lat;
   double _lon;
   String _apiKey;
@@ -35,16 +37,20 @@ class NearbyState extends State<NearbyScreen> {
   }
 
   _getLocation() async {
+    print("Will try to get location");
     var location = Location();
     try {
       currentLocation = await location.getLocation();
       _lat = currentLocation["latitude"];
       _lon = currentLocation["longitude"];
       _gotLocation = true;
+      print("Got locaation");
+      print("Lat: $_lat, Lon: $_lon");
       setState(() {
         _center = LatLng(_lat, _lon);
       });
     } on Exception {
+      print("Didn't find location");
       currentLocation = null;
     }
   }
@@ -93,6 +99,8 @@ class NearbyState extends State<NearbyScreen> {
           final loc = geo["location"];
           final lat = loc["lat"];
           final lng = loc["lng"];
+
+          print("Marker: $name");
 
           final marker = Marker(
             markerId: MarkerId(name),
