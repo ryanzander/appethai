@@ -1,10 +1,10 @@
-//import 'dart:io';
 import 'dart:async';
 import 'dart:convert';
+//import 'dart:io';
 
-import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:http/http.dart' as http;
 import 'package:location/location.dart';
 
 import '../resources/api_keys.dart';
@@ -37,20 +37,17 @@ class NearbyState extends State<NearbyScreen> {
   }
 
   _getLocation() async {
-    print("Will try to get location");
     var location = Location();
     try {
       currentLocation = await location.getLocation();
       _lat = currentLocation["latitude"];
       _lon = currentLocation["longitude"];
       _gotLocation = true;
-      print("Got locaation");
-      print("Lat: $_lat, Lon: $_lon");
+
       setState(() {
         _center = LatLng(_lat, _lon);
       });
     } on Exception {
-      print("Didn't find location");
       currentLocation = null;
     }
   }
@@ -85,8 +82,6 @@ class NearbyState extends State<NearbyScreen> {
     final url =
         "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=$_lat,$_lon&key=$_apiKey&radius=10000&keyword=thai&type=restaurant";
 
-    print("url: $url");
-
     final response = await http.get(url);
     if (response.statusCode == 200) {
       setState(() {
@@ -99,8 +94,6 @@ class NearbyState extends State<NearbyScreen> {
           final loc = geo["location"];
           final lat = loc["lat"];
           final lng = loc["lng"];
-
-          print("Marker: $name");
 
           final marker = Marker(
             markerId: MarkerId(name),

@@ -76,7 +76,6 @@ class CategoriesScreen extends StatelessWidget {
                   child: FlatButton(
                     padding: EdgeInsets.all(10.0),
                     onPressed: () {
-                      print('polular');
                       Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -122,7 +121,6 @@ class CategoriesScreen extends StatelessWidget {
                   child: FlatButton(
                     padding: EdgeInsets.all(10.0),
                     onPressed: () {
-                      print('rice');
                       Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -168,7 +166,6 @@ class CategoriesScreen extends StatelessWidget {
                   child: FlatButton(
                     padding: EdgeInsets.all(10.0),
                     onPressed: () {
-                      print('noodles');
                       Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -214,7 +211,6 @@ class CategoriesScreen extends StatelessWidget {
                   child: FlatButton(
                     padding: EdgeInsets.all(10.0),
                     onPressed: () {
-                      print('curries');
                       Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -260,7 +256,6 @@ class CategoriesScreen extends StatelessWidget {
                   child: FlatButton(
                     padding: EdgeInsets.all(10.0),
                     onPressed: () {
-                      print('fried');
                       Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -306,7 +301,6 @@ class CategoriesScreen extends StatelessWidget {
                   child: FlatButton(
                     padding: EdgeInsets.all(10.0),
                     onPressed: () {
-                      print('grilled');
                       Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -352,7 +346,6 @@ class CategoriesScreen extends StatelessWidget {
                   child: FlatButton(
                     padding: EdgeInsets.all(10.0),
                     onPressed: () {
-                      print('soups');
                       Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -398,7 +391,6 @@ class CategoriesScreen extends StatelessWidget {
                   child: FlatButton(
                     padding: EdgeInsets.all(10.0),
                     onPressed: () {
-                      print('salads');
                       Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -444,7 +436,6 @@ class CategoriesScreen extends StatelessWidget {
                   child: FlatButton(
                     padding: EdgeInsets.all(10.0),
                     onPressed: () {
-                      print('vegetarian');
                       Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -490,7 +481,6 @@ class CategoriesScreen extends StatelessWidget {
                   child: FlatButton(
                     padding: EdgeInsets.all(10.0),
                     onPressed: () {
-                      print('northern');
                       Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -536,7 +526,6 @@ class CategoriesScreen extends StatelessWidget {
                   child: FlatButton(
                     padding: EdgeInsets.all(10.0),
                     onPressed: () {
-                      print('southern');
                       Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -582,7 +571,6 @@ class CategoriesScreen extends StatelessWidget {
                   child: FlatButton(
                     padding: EdgeInsets.all(10.0),
                     onPressed: () {
-                      print('other');
                       Navigator.push(
                         context,
                         MaterialPageRoute(

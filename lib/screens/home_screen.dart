@@ -1,12 +1,11 @@
-import 'package:flutter/material.dart';
-
 import 'dart:convert';
+
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:url_launcher/url_launcher.dart';
 
 import '../model/food.dart';
 import '../resources/constants.dart';
-
 import 'categories_screen.dart';
 import 'food_list_screen.dart';
 import 'nearby_screen.dart';
@@ -120,11 +119,11 @@ class HomeScreenState extends State<HomeScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Container(
-                padding: EdgeInsets.only(left: 40.0, right: 40.0),
+                height: 120.0,
+                width: 120.0,
                 child: FlatButton(
                   padding: EdgeInsets.all(10.0),
                   onPressed: () {
-                    print('see all');
                     Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -160,11 +159,11 @@ class HomeScreenState extends State<HomeScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Container(
-                padding: EdgeInsets.only(left: 40.0, right: 40.0),
+                height: 120.0,
+                width: 120.0,
                 child: FlatButton(
                   padding: EdgeInsets.all(10.0),
                   onPressed: () {
-                    print('categories');
                     Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -201,11 +200,11 @@ class HomeScreenState extends State<HomeScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Container(
-                padding: EdgeInsets.only(left: 40.0, right: 40.0),
+                height: 120.0,
+                width: 120.0,
                 child: FlatButton(
                   padding: EdgeInsets.all(10.0),
                   onPressed: () {
-                    print('favorites');
                     Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -242,11 +241,11 @@ class HomeScreenState extends State<HomeScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Container(
-                padding: EdgeInsets.only(left: 40.0, right: 40.0),
+                height: 120.0,
+                width: 120.0,
                 child: FlatButton(
                   padding: EdgeInsets.all(10.0),
                   onPressed: () {
-                    print('nearby');
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => NearbyScreen()),

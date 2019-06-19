@@ -250,7 +250,6 @@ class FoodInfoState extends State<FoodInfoScreen> {
   _addToFavorites() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     var favorites = prefs.get('favorites') ?? [];
-    print("add to favorites: $favorites");
 
     final id = "${widget.food.id}";
     List<String> tempList = [];
@@ -259,14 +258,13 @@ class FoodInfoState extends State<FoodInfoScreen> {
       tempList.add(item);
     });
     tempList.add(id);
-    print("new favorites: $tempList");
+
     prefs.setStringList('favorites', tempList);
   }
 
   _removeFromFavorites() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     var favorites = prefs.get('favorites') ?? [];
-    print("remove from favorites: $favorites");
 
     final id = "${widget.food.id}";
     List<String> tempList = [];
@@ -275,14 +273,13 @@ class FoodInfoState extends State<FoodInfoScreen> {
         tempList.add(item);
       }
     });
-    print("new favorites: $tempList");
+
     prefs.setStringList('favorites', tempList);
   }
 
   _checkFavorites() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var favorites = prefs.get('favorites') ?? [];
-    print("checking favorites: $favorites");
 
     final id = "${widget.food.id}";
     var isFavorite = false;

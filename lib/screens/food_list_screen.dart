@@ -49,7 +49,6 @@ class FoodListState extends State<FoodListScreen> {
       _filteredList.addAll(_foodList);
     }
     if (_searchTerm != "") {
-      print("search term: $_searchTerm");
       _filterSearchResults(_searchTerm);
     }
   }
@@ -57,7 +56,7 @@ class FoodListState extends State<FoodListScreen> {
   _getFavorites() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var favorites = prefs.get('favorites') ?? [];
-    print("List got favorites: $favorites");
+
     _foodList.clear();
     _filteredList.clear();
     allFoods.forEach(
@@ -71,7 +70,6 @@ class FoodListState extends State<FoodListScreen> {
     setState(() {
       _filteredList.addAll(_foodList);
       if (_searchTerm != "") {
-        print("search term: $_searchTerm");
         _filterSearchResults(_searchTerm);
       }
     });
@@ -178,7 +176,6 @@ class FoodListState extends State<FoodListScreen> {
                       padding: EdgeInsets.all(0.0),
                       child: FoodCell(food),
                       onPressed: () {
-                        print("clicked $i");
                         Navigator.push(
                                 context,
                                 MaterialPageRoute(
