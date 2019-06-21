@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
-//import 'dart:io';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -18,76 +18,115 @@ class NearbyScreen extends StatefulWidget {
 }
 
 class NearbyState extends State<NearbyScreen> {
-  GoogleMapController mapController;
-
-  LatLng _center = LatLng(45.521563, -122.677433);
-  var _gotLocation = false;
-
-  Map<String, double> currentLocation;
-
+  Completer<GoogleMapController> _controller = Completer();
+  CameraPosition _position;
+  bool _gotLocation;
   double _lat;
   double _lon;
   String _apiKey;
   List<Marker> _markers = [];
+  var _location = Location();
 
   @override
   void initState() {
     super.initState();
+
+    _gotLocation = false;
+    _position = CameraPosition(
+      target: LatLng(45.521563, -122.677433),
+      zoom: 13,
+    );
+
     _getLocation();
   }
 
+// location plugin
+// This plugin does NOT work for Android if the user has Google Device Location switched OFF.
   _getLocation() async {
-    var location = Location();
+    print("get location called");
     try {
-      currentLocation = await location.getLocation();
-      _lat = currentLocation["latitude"];
-      _lon = currentLocation["longitude"];
-      _gotLocation = true;
+      print("should try to get location");
+      var currentLocation = await _location.getLocation();
 
-      setState(() {
-        _center = LatLng(_lat, _lon);
-      });
+      if (_gotLocation == false) {
+        _onGotLocation(currentLocation);
+      }
     } on Exception {
-      currentLocation = null;
+      _gotLocation = false;
+      print("will listen for location change");
+
+      _location.onLocationChanged().listen((LocationData currentLocation) {
+        if (_gotLocation == false) {
+          _onGotLocation(currentLocation);
+        }
+      });
     }
+  }
+
+  _onGotLocation(LocationData currentLocation) {
+    _gotLocation = true;
+    print("gotLocation: $_gotLocation");
+    print(currentLocation.latitude);
+    print(currentLocation.longitude);
+    _lat = currentLocation.latitude;
+    _lon = currentLocation.longitude;
+
+    print("should go to position");
+    final center = LatLng(_lat, _lon);
+    final position = CameraPosition(
+      target: center,
+      zoom: 13,
+    );
+
+    _goToPosition(position);
   }
 
   Widget _getMap() {
-    if (_gotLocation == true) {
-      return GoogleMap(
-        onMapCreated: _onMapCreated,
-        scrollGesturesEnabled: true,
-        myLocationEnabled: true,
-        initialCameraPosition: CameraPosition(
-          target: _center,
-          zoom: 13.0,
-        ),
-        markers: _markers.toSet(),
-      );
-    } else {
-      return Center(child: Text("Location not found"));
-    }
+    print("get map");
+    return GoogleMap(
+      onMapCreated: (GoogleMapController controller) {
+        _controller.complete(controller);
+      },
+      scrollGesturesEnabled: true,
+      myLocationEnabled: true,
+      initialCameraPosition: _position,
+      markers: _markers.toSet(),
+    );
   }
 
-  Future<void> _onMapCreated(GoogleMapController controller) async {
-    mapController = controller;
+  Future _goToPosition(CameraPosition position) async {
+    //
+    print("will go to posoition");
+    final GoogleMapController controller = await _controller.future;
+    controller.animateCamera(CameraUpdate.newCameraPosition(position));
 
-    // if (Platform.isIOS) {
-    //   _apiKey = iosMapApiKey;
-    // }
-    // if (Platform.isAndroid) {
-    _apiKey = androidMapApiKey;
-    // }
+    _getMarkers();
+  }
+
+  Future<void> _getMarkers() async {
+    if (Platform.isIOS) {
+      _apiKey = iosMapApiKey;
+    }
+    if (Platform.isAndroid) {
+      _apiKey = androidMapApiKey;
+    }
 
     final url =
         "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=$_lat,$_lon&key=$_apiKey&radius=10000&keyword=thai&type=restaurant";
 
+    print("will get markers for: $_lat, $_lon");
+
     final response = await http.get(url);
     if (response.statusCode == 200) {
+      print("status: 200");
       setState(() {
         final map = json.decode(response.body);
+
         final results = map["results"];
-        _markers.clear();
+
+        print("Got ${results.length} marker results");
+        print(map.toString());
+        //
         results.forEach((result) {
           final name = result["name"];
           final geo = result["geometry"];
@@ -104,6 +143,7 @@ class NearbyState extends State<NearbyScreen> {
           );
           _markers.add(marker);
         });
+        print("setting state with added markers");
       });
     }
   }

@@ -15,7 +15,7 @@ Color mediumBlue = const Color(0xFF0A73E0);
 Color lightBlue = const Color(0xFF00AFEE);
 
 Color darkGreen = darkBlue;
-Color mediumGreen = darkBlue; //mediumBlue;
+Color mediumGreen = darkBlue;
 Color lightGreen = lightBlue;
 Color lightYellow = sunYellow;
 Color textGreen = lightBlue;
